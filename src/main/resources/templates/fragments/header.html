@@ -1,0 +1,45 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="container group">
+        <header class="header group">
+            <div class="header__logo">
+                <a href="/"><img src="static/images/cosca-store.png" width="250"> </a>
+            </div>
+            <a href="" class="header__icon-bar"><span></span><span></span><span></span></a>
+
+
+
+            <ul class="header__menu">
+
+                <hr class="hr">
+                <li class="header__menu__item"><a href="/">Home</a></li>
+                <li class="header__menu__item"><a th:href="@{/listaProdotti}">Store</a></li>
+                <li class="header__menu__item"><a href="">Chi Siamo</a></li>
+                <li class="header__menu__item"><a href="">Contattaci</a></li>
+
+                <img src="static/images/search.png" width="25px">
+
+                    <th:block sec:authorize="isAuthenticated()">
+                        <img src="static/images/user.png" width="25px">
+                        <a th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{logout}">Logout</a>
+                    </th:block>
+
+                    <th:block sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}"><img src="static/images/user.png" width="25px"></a>
+                    </th:block>
+
+                <a href=""><img src="static/images/cart.png" width="25px"> </a>
+
+
+
+
+
+          <!--      <a sec:authorize="!isAuthenticated()" class="btn btn-lg btn-primary" href="/register" role="button">Register &raquo;</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-lg btn-primary" href="/login" role="button">Login &raquo;</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-lg btn-primary" href="/logout" role="button">Logout &raquo;</a>  -->
+                <hr class="hr1">
+            </ul>
+        </header>
+    </div>
+</header>

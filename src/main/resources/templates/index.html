@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cosca Store</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" >
+    <h3>Lista Prodotti</h3>
+<table  border="1">
+    <tr>
+        <th>Codice</th>
+        <th>Nome</th>
+        <th>Descrizione</th>
+        <th>Quantità</th>
+        <th>Prezzo</th>
+        <th>Image</th>
+    </tr>
+
+    <tr th:each="prodotti : ${prod}">
+
+        <td th:text="${prodotti.codice}"></td>
+
+    </tr>
+</table>
+</div>
+
+</body>
+</html>
