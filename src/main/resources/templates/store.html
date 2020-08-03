@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th=“http://www.thymeleaf.org”
+       xmlns:th=“http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{fragments/main_layout}">
 <head>
     <meta charset="utf-8">
@@ -11,17 +12,7 @@
 <div layout:fragment="content" class="container" >
 
     <table>
-        <tr>
 
-            <th>nome</th>
-            <th>descrzione</th>
-            <th>quantità</th>
-            <th>prezzo</th>
-            <th>image</th>
-
-
-
-        </tr>
         </tr>
       <!--  <tr th:each="prodotto: ${prodotti}">
 
@@ -35,14 +26,22 @@
 
         </tr> -->
         <tr th:each="prodotto: ${prodotti}">
-
-            <td th:text="${prodotto.nome}"></td>
-            <td th:text="${prodotto.descrizione}"></td>
-            <td th:text="${prodotto.quantita}"></td>
-            <td th:text="${prodotto.prezzoP}"></td>
             <td><img th:src="${prodotto.image}" width="200"></td>
+            <td th:text="${prodotto.nome}"></td>
+           <!-- <td th:text="${prodotto.descrizione}"></td>  -->
 
-            <td><button type="button" class="btn btn-primary" th:text="Buy">Buy</button></td>
+
+
+
+            <td><div th:inline="text" class="col-md-2">Price: [[${prodotto.prezzoP}]] $</div></td>
+            <td>  <div th:inline="text" class="col-md-9">In Stock: [[${prodotto.quantita}]]</div></td>
+            <td><a th:href="@{'/shoppingCart/addProduct/{codice}'(codice=${product.codice})}" class="col-md-1"
+                   sec:authorize="isAuthenticated()" th:if="${prodotto.quantita}>0">
+                    <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
+                </a></td>
+
+
+
 
 
     </table>

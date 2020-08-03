@@ -130,7 +130,7 @@ public class ProdottoController {
         return "listaProdotti";
     } */
 
-/*    @RequestMapping({"/buyProdotto"})
+/*    @RequestMapping("/buy")
     public String listaProdotti(HttpServletRequest request, Model model,
                                 @RequestParam(value = "codice", defaultValue = "") String codice){
         Prodotto prodotto= null;

@@ -33,6 +33,10 @@ public class ProdottoService {
     @Transactional(readOnly = true)
     public List<Prodotto> getByNome(String nome) {return prodottoRepository.findByNome(nome);}
 
+    @Transactional
+    public Optional<Prodotto> findById(String codice) {
+        return prodottoRepository.findById(codice);}
+
  /*   public Page<Prodotto> findAllProductsPageable(Pageable pageable){return prodottoRepository.findAll(pageable);} */
 
 

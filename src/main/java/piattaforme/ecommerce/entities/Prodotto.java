@@ -3,10 +3,7 @@ package piattaforme.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -29,7 +26,7 @@ public class Prodotto {
     private Integer quantita;
 
     @NotNull
-    private Integer prezzoP;
+    private BigDecimal prezzoP;
 
     private String image;
 
@@ -40,7 +37,7 @@ public class Prodotto {
 
 
 
-    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, Integer prezzoP, String image) {
+    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, BigDecimal prezzoP, String image) {
         this.codice = codice;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -85,11 +82,11 @@ public class Prodotto {
         this.quantita = quantita;
     }
 
-    public Integer getPrezzoP() {
+    public BigDecimal getPrezzoP() {
         return prezzoP;
     }
 
-    public void setPrezzoP(Integer prezzoP) {
+    public void setPrezzoP(BigDecimal prezzoP) {
         this.prezzoP = prezzoP;
     }
 
@@ -109,4 +106,6 @@ public class Prodotto {
     public void setProdottoAcquisto(List<ProdottoAcquisto> prodottoAcquisto) {
         this.prodottoAcquisto = prodottoAcquisto;
     }
+
+
 }
