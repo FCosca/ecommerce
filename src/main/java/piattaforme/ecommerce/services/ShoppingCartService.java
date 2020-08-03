@@ -8,15 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import piattaforme.ecommerce.Exception.NoProdottiInStockException;
+import piattaforme.ecommerce.Exception.ProdottoException;
 import piattaforme.ecommerce.entities.Prodotto;
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 import piattaforme.ecommerce.repositories.ShoppingCartRepository;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ShoppingCartService {
@@ -28,11 +27,13 @@ public class ShoppingCartService {
 
     @Autowired
     public ShoppingCartService(ProdottoRepository prodottoRepository) {
-        this.prodottoRepository= prodottoRepository;
+        this.prodottoRepository = prodottoRepository;
     }
 
 
-    private Map<Prodotto, Integer> prodotti = new HashMap<>();
+
+
+   private Map<Prodotto, Integer> prodotti = new HashMap<>();
 
     public Map<Prodotto, Integer> getProductsInCart() {
         return Collections.unmodifiableMap(prodotti);
