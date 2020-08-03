@@ -31,7 +31,7 @@ public class Prodotto {
     @NotNull
     private Integer prezzoP;
 
-    private byte[] image;
+    private String image;
 
     @OneToMany(targetEntity = ProdottoAcquisto.class, mappedBy = "prodotto", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -40,7 +40,7 @@ public class Prodotto {
 
 
 
-    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, Integer prezzoP, byte[] image) {
+    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, Integer prezzoP, String image) {
         this.codice = codice;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -93,11 +93,11 @@ public class Prodotto {
         this.prezzoP = prezzoP;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

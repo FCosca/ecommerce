@@ -84,12 +84,12 @@ public class ProdottoService {
         }
     } */
 
-    @Cacheable(cacheNames = "prodotti")
+   /* @Cacheable(cacheNames = "prodotti")
     public List<?> listAll(){
         List<Prodotto> prodotti = new ArrayList<>();
         prodottoRepository.findAll().forEach(prodotti::add);
         return prodotti;
-    }
+    } */
 
   /*  public Optional<Prodotto> findByCodice(String codice){ return prodottoRepository.findByCodice(codice);} */
 

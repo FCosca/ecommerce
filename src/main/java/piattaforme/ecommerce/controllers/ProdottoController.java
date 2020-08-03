@@ -1,5 +1,7 @@
 package piattaforme.ecommerce.controllers;
 
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,9 @@ import piattaforme.ecommerce.services.ProdottoService;
 import piattaforme.ecommerce.utils.Pager;
 
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,7 +130,7 @@ public class ProdottoController {
         return "listaProdotti";
     } */
 
- /*   @RequestMapping({"/buyProdotto"})
+/*    @RequestMapping({"/buyProdotto"})
     public String listaProdotti(HttpServletRequest request, Model model,
                                 @RequestParam(value = "codice", defaultValue = "") String codice){
         Prodotto prodotto= null;
@@ -134,40 +138,12 @@ public class ProdottoController {
             prodotto = prodottoRepository.findProdottoByCodice(codice);
         }
         if (prodotto != null){
-            CartInfo cartInfo = Utils.getCartInSession(request);
-
-            ProductInfo productInfo = new ProductInfo(prodotto);
-
-            cartInfo.addProduct(productInfo, 1);
 
         }
         return "redirect:/shoppingCart";
     } */
 
-    /* @GetMapping("/list")
-    public String listAll(Model model){
-        model.addAttribute("prodotti", prodottoService.allProdotto());
-        return "store";
-    } */
 
-
- /*   @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String listAll(Model model){
-    model.addAttribute("prodotti", prodottoService.allProdotto());
-    return "prodotti/list";
- } */
-
- /*   @ModelAttribute("list")
-    public List<Prodotto> listAll(){
-        return prodottoRepository.findAll();
-    } */
-
- /*   @RequestMapping(value = "list", method = RequestMethod.GET)
-    public ModelAndView listAll(){
-        ModelAndView mav = new ModelAndView("list/list");
-        mav.addObject("prodotti", prodottoRepository.findAll()) ;
-        return mav;
-    } */
 
     @GetMapping("/list")
     public ModelAndView listAll(Model model){
@@ -177,6 +153,20 @@ public class ProdottoController {
         mv.getModel().put(prodottoService.allProdotto().toString(), "");
         return mv;
     }
+
+  /*  @GetMapping("/product/image/{codice}")
+
+    public void showProductImage(@PathVariable String codice,
+                               HttpServletResponse response) throws IOException {
+        response.setContentType("image/jpeg"); // Or whatever format you wanna use
+
+        Prodotto prodotto = prodottoRepository.findProdottoByCodice(codice);
+
+        OutputStream es = new ByteArrayOutputStream(prodotto.getImage());
+        IOUtils.copy(es, response.getOutputStream());
+    } */
+
+
 
 
 

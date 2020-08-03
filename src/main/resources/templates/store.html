@@ -23,15 +23,28 @@
 
         </tr>
         </tr>
+      <!--  <tr th:each="prodotto: ${prodotti}">
+
+            <td th:text="${prodotto.nome}"></td>
+            <td th:text="${prodotto.descrizione}"></td>
+            <td th:text="${prodotto.quantita}"></td>
+            <td th:text="${prodotto.prezzoP}"></td>
+            <img th:src="@{'product/image/' + @{prodotto.image}}">
+
+            <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
+
+        </tr> -->
         <tr th:each="prodotto: ${prodotti}">
 
             <td th:text="${prodotto.nome}"></td>
             <td th:text="${prodotto.descrizione}"></td>
             <td th:text="${prodotto.quantita}"></td>
             <td th:text="${prodotto.prezzoP}"></td>
-            <td th:text="${prodotto.image}"></td>
+            <td><img th:src="${prodotto.image}" width="200"></td>
 
-        </tr>
+            <td><button type="button" class="btn btn-primary" th:text="Buy">Buy</button></td>
+
+
     </table>
 
 </div>
