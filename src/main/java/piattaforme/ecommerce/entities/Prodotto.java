@@ -29,7 +29,7 @@ public class Prodotto {
     private Integer quantita;
 
     @NotNull
-    private BigDecimal prezzoP;
+    private Integer prezzoP;
 
     private byte[] image;
 
@@ -40,7 +40,7 @@ public class Prodotto {
 
 
 
-    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, BigDecimal prezzoP, byte[] image) {
+    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, Integer prezzoP, byte[] image) {
         this.codice = codice;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -85,11 +85,11 @@ public class Prodotto {
         this.quantita = quantita;
     }
 
-    public BigDecimal getPrezzoP() {
+    public Integer getPrezzoP() {
         return prezzoP;
     }
 
-    public void setPrezzoP(BigDecimal prezzoP) {
+    public void setPrezzoP(Integer prezzoP) {
         this.prezzoP = prezzoP;
     }
 

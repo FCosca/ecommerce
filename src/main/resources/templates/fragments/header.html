@@ -12,15 +12,15 @@
 
                 <hr class="hr">
                 <li class="header__menu__item"><a href="/">Home</a></li>
-                <li class="header__menu__item"><a th:href="@{/listaProdotti}">Store</a></li>
-                <li class="header__menu__item"><a href="">Chi Siamo</a></li>
-                <li class="header__menu__item"><a href="">Contattaci</a></li>
+                <li class="header__menu__item"><a href="/store">Store</a></li>
+                <li class="header__menu__item"><a href="/chi">Chi Siamo</a></li>
+                <li class="header__menu__item"><a href="/contattaci">Contattaci</a></li>
 
                 <img src="static/images/search.png" width="25px">
 
                     <th:block sec:authorize="isAuthenticated()">
                         <img src="static/images/user.png" width="25px">
-                        <a th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
+                        <a href="/myaccount" th:utext="${#request.userPrincipal.name}">..</a>
                         &nbsp;|&nbsp;
                         <a th:href="@{logout}">Logout</a>
                     </th:block>

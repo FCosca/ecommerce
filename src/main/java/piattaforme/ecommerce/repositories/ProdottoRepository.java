@@ -15,7 +15,7 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, String> {
     @Override
     List<Prodotto> findAll();
 
-    Optional<Prodotto> findByCodice(String codice);
+  /*  Optional<Prodotto> findByCodice(String codice); */
 
     Prodotto findProdottoByCodice(String codice);
 

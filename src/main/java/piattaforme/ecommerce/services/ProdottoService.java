@@ -2,6 +2,7 @@ package piattaforme.ecommerce.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +33,7 @@ public class ProdottoService {
     @Transactional(readOnly = true)
     public List<Prodotto> getByNome(String nome) {return prodottoRepository.findByNome(nome);}
 
-    public Page<Prodotto> findAllProductsPageable(Pageable pageable){return prodottoRepository.findAll(pageable);}
+ /*   public Page<Prodotto> findAllProductsPageable(Pageable pageable){return prodottoRepository.findAll(pageable);} */
 
 
 
@@ -71,7 +72,7 @@ public class ProdottoService {
         prodottoRepository.setQuantita(quantita, codice);
     }
 
-    @Transactional(readOnly = true)
+  /*  @Transactional(readOnly = true)
     public List<Prodotto> allProdotto(int pageNumber, int pageSize, String sortBy){
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
         Page<Prodotto> pagedResult = prodottoRepository.findAll(paging);
@@ -81,9 +82,16 @@ public class ProdottoService {
         else {
             return new ArrayList<>();
         }
+    } */
+
+    @Cacheable(cacheNames = "prodotti")
+    public List<?> listAll(){
+        List<Prodotto> prodotti = new ArrayList<>();
+        prodottoRepository.findAll().forEach(prodotti::add);
+        return prodotti;
     }
 
-    public Optional<Prodotto> findByCodice(String codice){ return prodottoRepository.findByCodice(codice);}
+  /*  public Optional<Prodotto> findByCodice(String codice){ return prodottoRepository.findByCodice(codice);} */
 
 
 }

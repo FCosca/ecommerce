@@ -42,10 +42,32 @@ public class IndexController {
     public String showIndex(Model model, Principal principal, Utente utente, Ordine ordine, Prodotto prodotto){
 
         return "index";
-
     }
 
-    @GetMapping("/prodotti")
+    @GetMapping("/chi")
+    public String chi(){
+        return "chi";
+    }
+
+    @GetMapping("/store")
+    public String store(){
+        return "store";
+    }
+
+    @GetMapping("/contattaci")
+    public String contattaci(){
+        return "contattaci";
+    }
+
+    @GetMapping("/myAccount")
+    public String myAccount() {
+        return  "myAccount";
+    }
+
+
+
+
+ /*   @GetMapping("/prodotti")
     public ModelAndView prodotti(@RequestParam("page") Optional<Integer> page){
         int evalPage = (page.orElse(0)<1) ? INITIAL_PAGE : page.get() -1;
         Page<Prodotto> prodotti = prodottoService.findAllProductsPageable(PageRequest.of(evalPage, 5));
@@ -56,5 +78,5 @@ public class IndexController {
         modelAndView.addObject("pager", pager);
         modelAndView.setViewName("/prodotti");
         return modelAndView;
-    }
+    } */
 }

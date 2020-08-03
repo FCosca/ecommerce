@@ -23,10 +23,10 @@ import java.util.Optional;
 @RestController
 public class ProdottoController {
 
-    private static final int INITIAL_PAGE = 0;
+ /*   private static final int INITIAL_PAGE = 0;
 
     @Autowired
-    public ProdottoController(ProdottoService prodottoService){this.prodottoService= prodottoService;}
+    public ProdottoController(ProdottoService prodottoService){this.prodottoService= prodottoService;} */
 
     @Autowired
     private ProdottoService prodottoService;
@@ -36,9 +36,11 @@ public class ProdottoController {
 
 
 
+
     @GetMapping("/prodotti")
     public ResponseEntity getAll(){
         return new ResponseEntity<>(prodottoService.allProdotto(), HttpStatus.OK);
+
     }
 
     @GetMapping("prodotti/{codice}")
@@ -101,7 +103,7 @@ public class ProdottoController {
         return new ResponseEntity<>("Quantità aggiornata!", HttpStatus.OK);
     }
 
-    @GetMapping("/listaProdotti")
+  /*  @GetMapping("/listaProdotti")
     public ResponseEntity getAll(Model model, @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, @RequestParam(value = "sortBy", defaultValue = "id") String sortBy){
         List<Prodotto> result = prodottoService.allProdotto(pageNumber, pageSize, sortBy);
         if (result.size() <= 0){
@@ -109,9 +111,9 @@ public class ProdottoController {
         }
         model.addAttribute("PaginaProdotti", result);
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+    } */
 
- /*  @RequestMapping({"/listaProdotti"})
+ /*  @GetMapping({"/listaProdotti"})
     public String listaprodotti(Model model, @RequestParam(value = "nome", defaultValue = "") String likeNome,
                                 @RequestParam(value = "page", defaultValue = "1") int page){
         final int maxResult=5;
@@ -121,9 +123,9 @@ public class ProdottoController {
                 maxResult, maxNavigationPage, likeNome);
         model.addAttribute("Pagina Prodotti", result);
         return "listaProdotti";
-    }
+    } */
 
-    @RequestMapping({"/buyProdotto"})
+ /*   @RequestMapping({"/buyProdotto"})
     public String listaProdotti(HttpServletRequest request, Model model,
                                 @RequestParam(value = "codice", defaultValue = "") String codice){
         Prodotto prodotto= null;
@@ -140,6 +142,13 @@ public class ProdottoController {
         }
         return "redirect:/shoppingCart";
     } */
+
+    @GetMapping({"/list"})
+    public String listAll(Model model){
+        model.addAttribute("prodotti", prodottoService.allProdotto());
+        return "prodotto/list";
+    }
+
 
 
 

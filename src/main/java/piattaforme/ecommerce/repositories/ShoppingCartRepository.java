@@ -9,13 +9,13 @@ import java.util.Map;
 public interface ShoppingCartRepository extends JpaRepository<Prodotto, String> {
 
 
-    void addProduct(Prodotto prodotto);
+/*    void addProduct(Prodotto prodotto);
 
-    void removeProduct(Prodotto prodotto);
+    void removeProduct(Prodotto prodotto); */
 
-    Map<Prodotto, Integer> getProdottiInCart();
+  /*  Map<Prodotto, Integer> getProdottiInCart(); */
 
-    void checkout() throws NoProdottiInStockException;
+ /*   void checkout() throws NoProdottiInStockException; */
 
 
 

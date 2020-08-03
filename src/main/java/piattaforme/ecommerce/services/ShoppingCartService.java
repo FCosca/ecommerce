@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import piattaforme.ecommerce.Exception.NoProdottiInStockException;
 import piattaforme.ecommerce.entities.Prodotto;
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 
@@ -19,15 +18,14 @@ import java.util.Map;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class ShoppingCartService {
-
+/*
 
     private ProdottoRepository prodottoRepository;
 
 
     private Map<Prodotto, Integer> prodotti = new HashMap<>();
 
-    @Autowired
-    public ShoppingCartService(ProdottoRepository prodottoRepository){this.prodottoRepository= prodottoRepository;}
+
 
 
     public void addProduct(Prodotto prodotto){
@@ -48,9 +46,9 @@ public class ShoppingCartService {
 
         }
     }
-    public Map<Prodotto, Integer> getProdottiInCart(){return Collections.unmodifiableMap(prodotti);}
+ /*   public Map<Prodotto, Integer> getProdottiInCart(){return Collections.unmodifiableMap(prodotti);} */
 
-    public void checkout() throws NoProdottiInStockException {
+ /*   public void checkout() throws NoProdottiInStockException {
         Prodotto prodotto;
         for(Map.Entry<Prodotto, Integer> entry: prodotti.entrySet()){
             prodotto = prodottoRepository.findOne(entry.getKey().getCodice());
@@ -68,5 +66,5 @@ public class ShoppingCartService {
                 .map(entry -> entry.getKey().getPrezzoP().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
-    }
+    } */
 }

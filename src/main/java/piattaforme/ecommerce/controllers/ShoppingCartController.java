@@ -24,7 +24,7 @@ public class ShoppingCartController {
         this.prodottoService= prodottoService;
     }
 
-    @GetMapping("/cart")
+ /*   @GetMapping("/cart")
     public ModelAndView ShoppingCart(){
         ModelAndView modelAndView= new ModelAndView("/cart");
         modelAndView.addObject("Prodotti", shoppingCartService.getProdottiInCart());
@@ -36,15 +36,15 @@ public class ShoppingCartController {
     public ModelAndView removeProductFromCart(@PathVariable("codice") String codice){
         prodottoService.findByCodice(codice).ifPresent(shoppingCartService::removeProduct);
         return ShoppingCart();
-    }
+    }  */
 
-    @GetMapping("/cart/addProduct/{codice}")
+/*    @GetMapping("/cart/addProduct/{codice}")
     public ModelAndView addProductToCart(@PathVariable("codice") String codice){
         prodottoService.findByCodice(codice).isPresent(shoppingCartService::addProduct);
         return ShoppingCart();
-    }
+    } */
 
-    @GetMapping("/cart/checkout")
+  /*  @GetMapping("/cart/checkout")
     public ModelAndView checkout(){
         try {
             shoppingCartService.checkout();
@@ -53,7 +53,7 @@ public class ShoppingCartController {
             return ShoppingCart().addObject("No Disponibilità", e.getMessage());
         }
         return ShoppingCart();
-    }
+    } */
 
 
 }
