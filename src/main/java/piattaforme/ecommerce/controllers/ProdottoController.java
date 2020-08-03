@@ -143,10 +143,10 @@ public class ProdottoController {
         return "redirect:/shoppingCart";
     } */
 
-    @GetMapping({"/list"})
+    @GetMapping("/list")
     public String listAll(Model model){
         model.addAttribute("prodotti", prodottoService.allProdotto());
-        return "prodotto/list";
+        return "store";
     }
 
 

@@ -49,10 +49,6 @@ public class IndexController {
         return "chi";
     }
 
-    @GetMapping("/store")
-    public String store(){
-        return "store";
-    }
 
     @GetMapping("/contattaci")
     public String contattaci(){
