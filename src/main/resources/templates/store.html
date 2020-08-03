@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb"
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th=“http://www.thymeleaf.org”
       layout:decorate="~{fragments/main_layout}">
 <head>
@@ -12,7 +12,7 @@
 
     <table>
         <tr>
-            <th>Codice</th>
+
             <th>nome</th>
             <th>descrzione</th>
             <th>quantità</th>
@@ -22,8 +22,14 @@
 
 
         </tr>
+        </tr>
         <tr th:each="prodotto: ${prodotti}">
-            <td th:text="${prodotto.codice}"></td>
+
+            <td th:text="${prodotto.nome}"></td>
+            <td th:text="${prodotto.descrizione}"></td>
+            <td th:text="${prodotto.quantita}"></td>
+            <td th:text="${prodotto.prezzoP}"></td>
+            <td th:text="${prodotto.image}"></td>
 
         </tr>
     </table>

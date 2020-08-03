@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -143,11 +144,41 @@ public class ProdottoController {
         return "redirect:/shoppingCart";
     } */
 
-    @GetMapping("/list")
+    /* @GetMapping("/list")
     public String listAll(Model model){
         model.addAttribute("prodotti", prodottoService.allProdotto());
         return "store";
+    } */
+
+
+ /*   @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String listAll(Model model){
+    model.addAttribute("prodotti", prodottoService.allProdotto());
+    return "prodotti/list";
+ } */
+
+ /*   @ModelAttribute("list")
+    public List<Prodotto> listAll(){
+        return prodottoRepository.findAll();
+    } */
+
+ /*   @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ModelAndView listAll(){
+        ModelAndView mav = new ModelAndView("list/list");
+        mav.addObject("prodotti", prodottoRepository.findAll()) ;
+        return mav;
+    } */
+
+    @GetMapping("/list")
+    public ModelAndView listAll(Model model){
+        model.addAttribute("prodotti", prodottoService.allProdotto());
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("store");
+        mv.getModel().put(prodottoService.allProdotto().toString(), "");
+        return mv;
     }
+
+
 
 
 
