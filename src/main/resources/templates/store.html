@@ -35,7 +35,7 @@
 
             <td><div th:inline="text" class="col-md-2">Price: [[${prodotto.prezzoP}]] $</div></td>
             <td>  <div th:inline="text" class="col-md-9">In Stock: [[${prodotto.quantita}]]</div></td>
-            <td><a th:href="@{'/shoppingCart/addProduct/{codice}'(codice=${product.codice})}" class="col-md-1"
+            <td><a th:href="@{'/shoppingCart/addProduct/{codice}'(codice=${prodotto.codice})}" class="col-md-1"
                    sec:authorize="isAuthenticated()" th:if="${prodotto.quantita}>0">
                     <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
                 </a></td>
