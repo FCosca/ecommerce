@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Prodotto {
@@ -99,7 +100,21 @@ public class Prodotto {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prodotto that = (Prodotto) o;
+        return codice.equalsIgnoreCase(that.codice);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(codice);
+    }
 
-
+    @Override
+    public String toString() {
+        return  "codice = " + codice;
+    }
 }

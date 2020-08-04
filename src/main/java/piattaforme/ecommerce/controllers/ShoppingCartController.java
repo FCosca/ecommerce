@@ -37,7 +37,7 @@ public class ShoppingCartController {
     public ModelAndView shoppingCart() {
         ModelAndView modelAndView = new ModelAndView("/shoppingCart");
        modelAndView.addObject("prodotti", shoppingCartService.getProductsInCart());
-        modelAndView.addObject("totale", shoppingCartService.getTotal().toString());
+       modelAndView.addObject("totale", shoppingCartService.getTotal().toString());
         return modelAndView;
     }
 
@@ -47,7 +47,7 @@ public class ShoppingCartController {
         return shoppingCart();
     }
 
-    @GetMapping("/shoppingCart/removeProduct/{codice}")
+   @GetMapping("/shoppingCart/removeProduct/{codice}")
     public ModelAndView removeProductFromCart(@PathVariable("codice") String codice) {
         prodottoService.findById(codice).ifPresent(shoppingCartService::removeProduct);
         return shoppingCart();

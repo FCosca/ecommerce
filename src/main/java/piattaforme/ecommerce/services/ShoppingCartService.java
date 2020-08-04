@@ -14,6 +14,7 @@ import piattaforme.ecommerce.entities.Prodotto;
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 import piattaforme.ecommerce.repositories.ShoppingCartRepository;
 
+
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
@@ -53,12 +54,23 @@ public class ShoppingCartService {
         }
     }
 
+/* public void addProdotto(Prodotto prodotto) {
+        if (prodotti.containsKey(prodotto))
+            prodotti.put(prodotto.getCodice(), prodotti.get(prodotto) + 1);
+        else {
+            prodotti.put(prodotto.getCodice(), 1);
+        } */
+
 
     @Transactional
     public void removeProduct(Prodotto prodotto) {
-        if (prodotti.containsKey(prodotto)) {
-            prodotti.remove(prodotto);
-        }
+            if (prodotti.containsKey(prodotto)) {
+                if (prodotti.get(prodotto) > 1)
+                    prodotti.replace(prodotto, prodotti.get(prodotto) - 1);
+                else if (prodotti.get(prodotto) == 1) {
+                    prodotti.remove(prodotto);
+                }
+            }
 
 
 
@@ -100,5 +112,4 @@ public class ShoppingCartService {
     } */
 
 
-
-}
+    }
