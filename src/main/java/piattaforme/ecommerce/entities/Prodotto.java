@@ -2,6 +2,8 @@ package piattaforme.ecommerce.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.mail.imap.protocol.INTERNALDATE;
+import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -26,18 +28,16 @@ public class Prodotto {
     private Integer quantita;
 
     @NotNull
+
     private BigDecimal prezzoP;
 
     private String image;
 
-    @OneToMany(targetEntity = ProdottoAcquisto.class, mappedBy = "prodotto", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<ProdottoAcquisto> prodottoAcquisto;
 
 
 
 
-    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita, BigDecimal prezzoP, String image) {
+    public Prodotto(@NotEmpty String codice, @NotEmpty String nome, @NotEmpty String descrizione, @NotNull Integer quantita,  BigDecimal  prezzoP, String image) {
         this.codice = codice;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -82,11 +82,11 @@ public class Prodotto {
         this.quantita = quantita;
     }
 
-    public BigDecimal getPrezzoP() {
+    public   BigDecimal  getPrezzoP() {
         return prezzoP;
     }
 
-    public void setPrezzoP(BigDecimal prezzoP) {
+    public void setPrezzoP( BigDecimal  prezzoP) {
         this.prezzoP = prezzoP;
     }
 
@@ -99,13 +99,7 @@ public class Prodotto {
     }
 
 
-    public List<ProdottoAcquisto> getProdottoAcquisto() {
-        return prodottoAcquisto;
-    }
 
-    public void setProdottoAcquisto(List<ProdottoAcquisto> prodottoAcquisto) {
-        this.prodottoAcquisto = prodottoAcquisto;
-    }
 
 
 }

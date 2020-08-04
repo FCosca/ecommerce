@@ -20,9 +20,7 @@ public class ProdottoAcquisto {
     @JsonIgnore
     private Ordine ordine;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "prodotto")
-    private Prodotto prodotto;
+
 
 
     public ProdottoAcquisto(int id) {
@@ -45,13 +43,6 @@ public class ProdottoAcquisto {
         this.ordine = ordine;
     }
 
-    public Prodotto getProdotto() {
-        return prodotto;
-    }
-
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
-    }
 
 
 

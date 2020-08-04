@@ -32,7 +32,7 @@
 
 
 
-
+            <td><div th:inline="text" class="col-md-2">Nome: [[${prodotto.nome}]] </div></td>
             <td><div th:inline="text" class="col-md-2">Price: [[${prodotto.prezzoP}]] $</div></td>
             <td>  <div th:inline="text" class="col-md-9">In Stock: [[${prodotto.quantita}]]</div></td>
             <td><a th:href="@{'/shoppingCart/addProduct/{codice}'(codice=${prodotto.codice})}" class="col-md-1"

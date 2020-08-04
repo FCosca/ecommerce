@@ -10,6 +10,7 @@ import org.springframework.web.context.WebApplicationContext;
 import piattaforme.ecommerce.Exception.NoProdottiInStockException;
 import piattaforme.ecommerce.Exception.ProdottoException;
 import piattaforme.ecommerce.entities.Prodotto;
+
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 import piattaforme.ecommerce.repositories.ShoppingCartRepository;
 
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCartService {
 
     @Autowired
@@ -33,12 +35,16 @@ public class ShoppingCartService {
 
 
 
+
+
+
    private Map<Prodotto, Integer> prodotti = new HashMap<>();
 
     public Map<Prodotto, Integer> getProductsInCart() {
         return Collections.unmodifiableMap(prodotti);
     }
 
+    @Transactional
     public void addProdotto(Prodotto prodotto) {
         if (prodotti.containsKey(prodotto)) {
             prodotti.replace(prodotto, prodotti.get(prodotto) + 1);
@@ -47,17 +53,19 @@ public class ShoppingCartService {
         }
     }
 
+
+    @Transactional
     public void removeProduct(Prodotto prodotto) {
         if (prodotti.containsKey(prodotto)) {
-            if (prodotti.get(prodotto) > 1)
-                prodotti.replace(prodotto, prodotti.get(prodotto) - 1);
-            else if (prodotti.get(prodotto) == 1) {
-                prodotti.remove(prodotto);
-            }
+            prodotti.remove(prodotto);
         }
-    }
 
- /*   public void checkout() throws NoProdottiInStockException {
+
+
+        }
+
+
+  /*  public void checkout() throws NoProdottiInStockException {
         Prodotto prodotto;
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
             // Refresh quantity for every product before checking
@@ -77,6 +85,20 @@ public class ShoppingCartService {
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
     }
+
+ /*   public List<Prodotto> getAll() {
+
+        return (List<Prodotto>) prodottoRepository.findAll();
+
+    }
+    public Prodotto findById(String codice) {
+
+        Prodotto p = prodottoRepository.findById(codice).orElse(null);
+
+        return p;
+
+    } */
+
 
 
 }

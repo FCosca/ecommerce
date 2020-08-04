@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th=“http://www.thymeleaf.org”
+      xmlns:th=“http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{fragments/main_layout}">
 <head>
     <meta charset="utf-8">
@@ -10,21 +11,21 @@
 <body>
 <div layout:fragment="content" class="container" >
 
-    <div class="container">
+
 
         <h1 class="jumbotron">
             <span sec:authentication="name"></span>'s Shopping Cart
         </h1>
 
         <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
-
+    <table>
         <div class="panel-default well" th:each="prodotto : ${prodotti}">
             <div class="panel-heading">
-                <h1><a th:text="${prodotto.nome}" th:href="@{'/prodotto/' + ${prodotto.getKey().codice}}">Title</a></h1>
-                <h3 th:text="${prodotto.descrizione}">Description</h3>
+
             </div>
             <div class="row panel-body">
-                <div th:inline="text" class="col-md-2">Price: [[${prodotto.getKey().price}]] $</div>
+                <div th:inline="text" class="col-md-1">Nome: [[${prodotto.getKey().nome}]]</div>
+                <div th:inline="text" class="col-md-2">Price: [[${prodotto.getKey().prezzoP}]] $</div>
                 <div th:inline="text" class="col-md-9">Quantity: [[${prodotto.getValue()}]]</div>
                 <a th:href="@{'/shoppingCart/removeProduct/{codice}'(codice=${prodotto.getKey().codice})}" class="col-md-1">
                     <button type="button" class="btn btn-primary" th:text="Remove">Remove</button>
@@ -34,13 +35,13 @@
         </div>
 
         <div class="row panel-body">
-            <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
+            <h2 class="col-md-11" th:inline="text">Totale: [[${total}]]</h2>
             <a th:href="@{'/shoppingCart/checkout'}" class="col-md-1">
                 <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
             </a>
         </div>
 
-    </div>
+    </table>
 
 </div>
 
