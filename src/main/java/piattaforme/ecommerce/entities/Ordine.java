@@ -1,6 +1,7 @@
 package piattaforme.ecommerce.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -27,8 +28,11 @@ public class Ordine {
     @JoinColumn(name = "buyer")
     private Utente buyer;
 
-    @OneToMany(mappedBy = "ordine", cascade = CascadeType.MERGE)
-    private List<ProdottoAcquisto> prodottoAcquisto;
+    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Prodotto> prodotto;
+
+
 
 
 
@@ -66,11 +70,11 @@ public class Ordine {
     }
 
 
-    public List<ProdottoAcquisto> getProdottoAcquisto() {
-        return prodottoAcquisto;
+    public List<Prodotto> getProdotto() {
+        return prodotto;
     }
 
-    public void setProdottoAcquisto(List<ProdottoAcquisto> prodottoAcquisto) {
-        this.prodottoAcquisto = prodottoAcquisto;
+    public void setProdotto(List<Prodotto> prodotto) {
+        this.prodotto = prodotto;
     }
 }

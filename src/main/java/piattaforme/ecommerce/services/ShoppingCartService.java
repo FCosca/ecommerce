@@ -11,6 +11,7 @@ import piattaforme.ecommerce.Exception.NoProdottiInStockException;
 import piattaforme.ecommerce.Exception.ProdottoException;
 import piattaforme.ecommerce.entities.Prodotto;
 
+import piattaforme.ecommerce.repositories.OrdineRepository;
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 import piattaforme.ecommerce.repositories.ShoppingCartRepository;
 
@@ -26,7 +27,12 @@ public class ShoppingCartService {
     @Autowired
     ShoppingCartRepository shoppingCartRepository;
 
+    @Autowired
+    OrdineRepository ordineRepository;
+
     private ProdottoRepository prodottoRepository;
+
+
 
     @Autowired
     public ShoppingCartService(ProdottoRepository prodottoRepository) {
@@ -77,19 +83,22 @@ public class ShoppingCartService {
         }
 
 
-  /*  public void checkout() throws NoProdottiInStockException {
+   public void checkout() throws NoProdottiInStockException {
         Prodotto prodotto;
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
             // Refresh quantity for every product before checking
-            prodotto = prodottoRepository.findOne(entry.getKey().getCodice());
+            prodotto = prodottoRepository.findProdottoByCodice(entry.getKey().getCodice());
             if (prodotto.getQuantita() < entry.getValue())
                 throw new NoProdottiInStockException(prodotto);
             entry.getKey().setQuantita(prodotto.getQuantita() - entry.getValue());
+            prodottoRepository.save(entry.getKey());
         }
-        prodottoRepository.save(prodotti.keySet());
+        for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
+            prodottoRepository.save(entry.getKey());
+        }
         prodottoRepository.flush();
         prodotti.clear();
-    } */
+    }
 
     public BigDecimal getTotal() {
         return prodotti.entrySet().stream()
@@ -97,6 +106,13 @@ public class ShoppingCartService {
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
     }
+/* public BigDecimal getTotal() {
+     BigDecimal d=new BigDecimal(0);
+     for(Map.Entry<Prodotto,Integer> e:prodotti.entrySet()) {
+         BigDecimal b=new BigDecimal(e.getKey().getQuantita());
+         d.add(e.getKey().getPrezzoP().multiply(b));
+     }
+     return d;} */
 
  /*   public List<Prodotto> getAll() {
 

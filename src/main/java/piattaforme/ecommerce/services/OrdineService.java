@@ -13,7 +13,7 @@ import piattaforme.ecommerce.Exception.UtenteNotFoundException;
 import piattaforme.ecommerce.entities.Ordine;
 import piattaforme.ecommerce.entities.Utente;
 import piattaforme.ecommerce.repositories.OrdineRepository;
-import piattaforme.ecommerce.repositories.ProdottoAcquistoRepository;
+
 import piattaforme.ecommerce.repositories.UtenteRepository;
 
 import javax.validation.Valid;
@@ -33,8 +33,7 @@ public class OrdineService {
     @Autowired
     ProdottoService prodottoService;
 
-    @Autowired
-    ProdottoAcquistoRepository prodottoAcquistoRepository;
+
 
    /* @Autowired
     private SessionFactory sessionFactory;

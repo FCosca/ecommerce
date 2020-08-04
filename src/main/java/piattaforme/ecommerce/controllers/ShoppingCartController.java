@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import piattaforme.ecommerce.Exception.NoProdottiInStockException;
 import piattaforme.ecommerce.entities.Prodotto;
 
+import piattaforme.ecommerce.services.OrdineService;
 import piattaforme.ecommerce.services.ProdottoService;
 import piattaforme.ecommerce.services.ShoppingCartService;
 
@@ -22,12 +23,14 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
     private final ProdottoService prodottoService;
+    private final OrdineService ordineService;
 
 
     @Autowired
-    public ShoppingCartController(ShoppingCartService shoppingCartService, ProdottoService prodottoService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService, ProdottoService prodottoService, OrdineService ordineService) {
         this.shoppingCartService = shoppingCartService;
         this.prodottoService = prodottoService;
+        this.ordineService = ordineService;
     }
 
 
@@ -37,7 +40,7 @@ public class ShoppingCartController {
     public ModelAndView shoppingCart() {
         ModelAndView modelAndView = new ModelAndView("/shoppingCart");
        modelAndView.addObject("prodotti", shoppingCartService.getProductsInCart());
-       modelAndView.addObject("totale", shoppingCartService.getTotal().toString());
+     modelAndView.addObject("totale", shoppingCartService.getTotal().toString());
         return modelAndView;
     }
 
@@ -53,7 +56,7 @@ public class ShoppingCartController {
         return shoppingCart();
     }
 
-  /*   @GetMapping("/shoppingCart/checkout")
+    @GetMapping("/shoppingCart/checkout")
     public ModelAndView checkout() {
         try {
             shoppingCartService.checkout();
@@ -61,7 +64,7 @@ public class ShoppingCartController {
             return shoppingCart().addObject("outOfStockMessage", e.getMessage());
         }
         return shoppingCart();
-    } */
+    }
 }
 
  /*  @RequestMapping("/shoppingCart/addProduct/{codice}")

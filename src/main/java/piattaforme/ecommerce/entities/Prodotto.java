@@ -117,4 +117,16 @@ public class Prodotto {
     public String toString() {
         return  "codice = " + codice;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "ordine")
+    private Ordine ordine;
+
+    public Ordine getOrdine() {
+        return ordine;
+    }
+
+    public void setOrdine(Ordine ordine) {
+        this.ordine = ordine;
+    }
 }
