@@ -118,8 +118,9 @@ public class Prodotto {
         return  "codice = " + codice;
     }
 
-    @ManyToOne
+ /*   @ManyToOne
     @JoinColumn(name = "ordine")
+    @JsonIgnore
     private Ordine ordine;
 
     public Ordine getOrdine() {
@@ -127,6 +128,22 @@ public class Prodotto {
     }
 
     public void setOrdine(Ordine ordine) {
+        this.ordine = ordine;
+    } */
+
+ /*   @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
+    private List<Prodotto> prodotto; */
+
+
+    @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Ordine> ordine ;
+
+    public List<Ordine> getOrdine() {
+        return ordine;
+    }
+
+    public void setOrdine(List<Ordine> ordine) {
         this.ordine = ordine;
     }
 }

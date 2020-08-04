@@ -28,9 +28,12 @@ public class Ordine {
     @JoinColumn(name = "buyer")
     private Utente buyer;
 
-    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Prodotto> prodotto;
+ /*   @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
+    private List<Prodotto> prodotto; */
+
+    @ManyToOne
+    @JoinColumn(name = "prodotto")
+    private Prodotto prodotto;
 
 
 
@@ -69,12 +72,20 @@ public class Ordine {
         this.buyer = buyer;
     }
 
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
 
-    public List<Prodotto> getProdotto() {
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
+
+
+/*    public List<Prodotto> getProdotto() {
         return prodotto;
     }
 
     public void setProdotto(List<Prodotto> prodotto) {
         this.prodotto = prodotto;
-    }
+    } */
 }
