@@ -156,6 +156,8 @@ public class ProdottoController {
         return mv;
     }
 
+
+
   /*  @GetMapping("/product/image/{codice}")
 
     public void showProductImage(@PathVariable String codice,

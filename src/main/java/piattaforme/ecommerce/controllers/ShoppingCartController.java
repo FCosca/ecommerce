@@ -26,6 +26,7 @@ public class ShoppingCartController {
     private final OrdineService ordineService;
 
 
+
     @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService, ProdottoService prodottoService, OrdineService ordineService) {
         this.shoppingCartService = shoppingCartService;

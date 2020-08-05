@@ -3,6 +3,7 @@ package piattaforme.ecommerce.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import piattaforme.ecommerce.entities.Ruolo;
 import piattaforme.ecommerce.entities.Utente;
 import piattaforme.ecommerce.repositories.UtenteRepository;
@@ -26,4 +27,7 @@ public class UtenteService {
         utenteRepository.save(utente);
         return utente;
     }
+
+    @Transactional(readOnly = true)
+    public Utente findByEmail(String email){return utenteRepository.findByEmail(email);}
 }

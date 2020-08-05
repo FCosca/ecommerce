@@ -92,10 +92,13 @@ public class ShoppingCartService {
                 throw new NoProdottiInStockException(prodotto);
             entry.getKey().setQuantita(prodotto.getQuantita() - entry.getValue());
             prodottoRepository.save(entry.getKey());
+
         }
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
             prodottoRepository.save(entry.getKey());
+
         }
+
         prodottoRepository.flush();
         prodotti.clear();
     }

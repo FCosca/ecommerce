@@ -10,10 +10,12 @@
 <body>
 <div layout:fragment="content" class="container" >
 
-    <header> Member Information</header>
-    <p sec:authorize="isAuthenticated()">First Name : <span sec:authorize="isAuthenticated()" th:text="${utente.nome}"></span></p>
+    <p sec:authorize="isAuthenticated()">Username: <span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}"></span></p>
+    <p sec:authorize="isAuthenticated()">First Name : <span sec:authorize="isAuthenticated()" th:text="${utenti.nome}"></span></p>
     <p sec:authorize="isAuthenticated()">Last Name : <span sec:authorize="isAuthenticated()" th:text="${utenti.cognome}"></span></p>
-    <p sec:authorize="isAuthenticated()">e - mail : <span sec:authorize="isAuthenticated()" th:text="${Utente.email}"></span></p>
+
+
+
 
 
 

@@ -2,7 +2,7 @@
     <div class="container group">
         <header class="header group">
             <div class="header__logo">
-                <a href="/"><img src="static/images/cosca-store.png" width="250"> </a>
+                <a href="/"><img src="static/images/cosca-store.png" alt="LOGO" width="250"> </a>
             </div>
             <a href="" class="header__icon-bar"><span></span><span></span><span></span></a>
 
@@ -16,20 +16,24 @@
                 <li class="header__menu__item"><a href="/chi">Chi Siamo</a></li>
                 <li class="header__menu__item"><a href="/contattaci">Contattaci</a></li>
 
-                <img src="static/images/search.png" width="25px">
+         <!--       <input type="text" th:field="*{datePlanted}" />
+                <a th:href="@{'/prodotti/{nome}'(nome=${prodotto.nome})}" class="col-md-1">
+                    <img src="static/images/search.png" width="25px"></a> -->
 
                     <th:block sec:authorize="isAuthenticated()">
-                        <img src="static/images/user.png" width="25px">
+                        <img src="static/images/user.png" alt="" width="25px">
                         <a href="/myaccount" th:utext="${#request.userPrincipal.name}">..</a>
                         &nbsp;|&nbsp;
                         <a th:href="@{logout}">Logout</a>
                     </th:block>
 
                     <th:block sec:authorize="!isAuthenticated()">
-                        <a th:href="@{/login}"><img src="static/images/user.png" width="25px"></a>
+                        <a th:href="@{/login}"><img src="static/images/user.png" alt="" width="25px"></a>
                     </th:block>
 
-                <a th:href="@{/shoppingCart}"><img src="static/images/cart.png" width="25px"> </a>
+                <a th:href="@{/shoppingCart}"><img src="static/images/cart.png" alt="CART" width="25px"> </a>
+
+
 
 
 

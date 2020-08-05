@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cosca Store</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" >
+
+    <h1>Bentornato Admin</h1>
+    <p sec:authorize="isAuthenticated()">Username: <span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}"></span></p>
+    <p sec:authorize="isAuthenticated()">First Name : <span sec:authorize="isAuthenticated()" th:text="${utenti.nome}"></span></p>
+    <p sec:authorize="isAuthenticated()">Last Name : <span sec:authorize="isAuthenticated()" th:text="${utenti.cognome}"></span></p>
+
+
+
+    <div>
+        <p>Aggiungere un nuovo Prodotto</p>
+        <input id="codice" type="text" placeholder="Enter codice"  required>
+        <input id="descrizione" type="text" placeholder="Enter descrizione"  required>
+        <input id="image" type="text" placeholder="Enter image"  required>
+        <input id="nome" type="text" placeholder="Enter nome"  required>
+        <input id="prezzoP" type="text" placeholder="Enter prezzo"  required>
+        <input id="quantita" type="text" placeholder="Enter quantità"  required>
+        <button id="submit-a">Aggiungi Prodotto</button>
+        <p id="risultato7"></p>
+        <script>
+            const input1 = document.getElementById("codice");
+            const input2 = document.getElementById("descrizione");
+            const input3= document.getElementById("image");
+            const input4= document.getElementById("nome");
+            const input5= document.getElementById("prezzoP");
+            const input6= document.getElementById("quantita");
+
+
+            const btn6 = document.getElementById("submit-a");
+
+
+            btn6.onclick = () => {
+
+                const obj = {
+                    codice: input1.value,
+                    descrizione: input2.value,
+                    image: input3.value,
+                    nome: input4.value,
+                    prezzoP: input5.value,
+                    quantita: input6.value,
+                }
+                fetch(`/prodotti/add`, {
+                    method: "POST",
+                    headers: {  'Accept': 'application/json',
+                        'Content-Type': 'application/json' },
+                    body:JSON.stringify(obj)
+                })
+                    .then(function(res){ return res.json(); })
+                    .then(function(data){ document.getElementById('risultato7').innerHTML=JSON.stringify(data)})
+            }
+        </script>
+    </div>
+    <br>
+    <hr>
+
+<!--    <div>
+        <p>Elimina un Prodotto tramite Codice</p>
+        <input id="dcodice" type="text" placeholder="Enter codice"  required>
+        <button id="submit-dcodice">Delete</button>
+        <p id="risultato6"></p>
+        <script>
+            const input5 = document.getElementById("dcodice");
+            const btn5 = document.getElementById("submit-dcodice");
+            btn5.onclick = () => {
+
+                let codice = input5.value;
+                fetch(`/prodotti/delete/${codice}`, {
+                    method: "DELETE",
+
+                })
+                    .then(function(res){ res.json(); })
+                    .then(function(data){ document.getElementById('risultato6').innerHTML=JSON.stringify(data)})
+            }
+        </script>
+    </div> -->
+
+    <div>
+        <p>Aggiungere un nuovo Fornitore</p>
+        <input id="uquantita" type="text" placeholder="Enter quantità"  required>
+        <input id="ucodice" type="text" placeholder="Enter codice"  required>
+
+        <button id="submit-up">Aggiorna Quantità</button>
+        <p id="risultato1"></p>
+        <script>
+            const input6a = document.getElementById("uquantita");
+            const input6b = document.getElementById("ucodice");
+
+            const btn6 = document.getElementById("submit-up");
+
+
+            btn6.onclick = () => {
+
+                const obj = {
+                    quantita: input6a.value,
+                    codice: input6b.value,
+
+                }
+                fetch(`/prodotti/modifica`, {
+                    method: "PUT",
+                    headers: {  'Accept': 'application/json',
+                        'Content-Type': 'application/json' },
+                    body:JSON.stringify(obj)
+                })
+                    .then(function(res){ return res.json(); })
+                    .then(function(data){ document.getElementById('risultato7').innerHTML=JSON.stringify(data)})
+            }
+        </script>
+    </div>
+
+
+
+
+</div>
+
+</body>
+</html>
