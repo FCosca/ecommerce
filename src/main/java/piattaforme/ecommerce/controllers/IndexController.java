@@ -60,8 +60,20 @@ public class IndexController {
         if(currentPrincipalName.equals("admin@admin.com"))
             return "admin";
         else
-            return "myaccount";
+            return "myccount";
     }
+
+    @GetMapping("/termini")
+    public String termini(){return "termini";}
+
+    @GetMapping("/privacy")
+    public String privacy(){return "privacy";}
+
+    @GetMapping("/cookie")
+    public String cookie(){return "cookie";}
+
+    @GetMapping("/faq")
+    public String faq(){return "faq";}
 
 
 

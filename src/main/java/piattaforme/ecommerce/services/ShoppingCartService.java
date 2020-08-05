@@ -3,6 +3,8 @@ package piattaforme.ecommerce.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -12,13 +14,16 @@ import piattaforme.ecommerce.Exception.ProdottoException;
 import piattaforme.ecommerce.entities.Ordine;
 import piattaforme.ecommerce.entities.Prodotto;
 
+import piattaforme.ecommerce.entities.Utente;
 import piattaforme.ecommerce.repositories.OrdineRepository;
 import piattaforme.ecommerce.repositories.ProdottoRepository;
 import piattaforme.ecommerce.repositories.ShoppingCartRepository;
+import piattaforme.ecommerce.repositories.UtenteRepository;
 
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -31,7 +36,12 @@ public class ShoppingCartService {
     @Autowired
     OrdineRepository ordineRepository;
 
+    @Autowired
+    UtenteRepository utenteRepository;
+
     private ProdottoRepository prodottoRepository;
+
+    OrdineService ordineService;
 
 
 
@@ -87,20 +97,25 @@ public class ShoppingCartService {
    public void checkout() throws NoProdottiInStockException {
         Prodotto prodotto;
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
-            // Refresh quantity for every product before checking
+            // Controllo quantità per tutti i prodotti prima di fare il checkout
             prodotto = prodottoRepository.findProdottoByCodice(entry.getKey().getCodice());
             if (prodotto.getQuantita() < entry.getValue())
                 throw new NoProdottiInStockException(prodotto);
             entry.getKey().setQuantita(prodotto.getQuantita() - entry.getValue());
             prodottoRepository.save(entry.getKey());
-            Ordine o=new Ordine();
-            ordineRepository.save(o);
+
 
         }
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {
             prodottoRepository.save(entry.getKey());
 
         }
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String currentPrincipalName = authentication.getName();
+
+       Ordine o=new Ordine(utenteRepository.findByEmail(currentPrincipalName));
+
+       ordineRepository.save(o);
 
         prodottoRepository.flush();
         prodotti.clear();

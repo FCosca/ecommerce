@@ -29,5 +29,5 @@ public class UtenteService {
     }
 
     @Transactional(readOnly = true)
-    public Utente findByEmail(String email){return utenteRepository.findByEmail(email);}
+    public Utente findUtenteByEmail(String email){return utenteRepository.findByEmail(email);}
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,11 +36,23 @@ public class Ordine {
     @JoinColumn(name = "prodotto")
     private Prodotto prodotto;  */
 
-    @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name="ORDINE_PRODOTTO", joinColumns = {
-            @JoinColumn(name="ORDINE_CODICE", referencedColumnName = "codice")}, inverseJoinColumns = {
-            @JoinColumn(name = "PRODOTTO_CODICE", referencedColumnName = "codice")})
+            @JoinColumn(name="ORDINE_CODICE")}, inverseJoinColumns = {
+            @JoinColumn(name = "PRODOTTO_CODICE")})
     private List<Prodotto> prodotto;
+
+    public Ordine (Long codice,Date dataOrdine, Utente buyer){
+        this.codice= codice;
+        this.dataOrdine= dataOrdine;
+        this.buyer= buyer;
+    }
+
+    public Ordine(Utente buyer){
+       /* this.prodotto= prodotto; */
+        this.buyer= buyer;
+    }
+
 
 
 
@@ -78,6 +91,15 @@ public class Ordine {
         this.buyer = buyer;
     }
 
+ /*   public List<Prodotto> getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(List<Prodotto> prodotto) {
+        this.prodotto = prodotto;
+    } */
+
+
     public List<Prodotto> getProdotto() {
         return prodotto;
     }
@@ -87,11 +109,4 @@ public class Ordine {
     }
 
 
-/*    public List<Prodotto> getProdotto() {
-        return prodotto;
-    }
-
-    public void setProdotto(List<Prodotto> prodotto) {
-        this.prodotto = prodotto;
-    } */
 }

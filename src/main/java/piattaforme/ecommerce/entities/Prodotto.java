@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Prodotto {
@@ -156,4 +157,6 @@ public class Prodotto {
     public void setOrdine(List<Ordine> ordine) {
         this.ordine = ordine;
     }
+
+
 }
