@@ -9,6 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import piattaforme.ecommerce.Exception.NoProdottiInStockException;
 import piattaforme.ecommerce.Exception.ProdottoException;
+import piattaforme.ecommerce.entities.Ordine;
 import piattaforme.ecommerce.entities.Prodotto;
 
 import piattaforme.ecommerce.repositories.OrdineRepository;
@@ -92,6 +93,8 @@ public class ShoppingCartService {
                 throw new NoProdottiInStockException(prodotto);
             entry.getKey().setQuantita(prodotto.getQuantita() - entry.getValue());
             prodottoRepository.save(entry.getKey());
+            Ordine o=new Ordine();
+            ordineRepository.save(o);
 
         }
         for (Map.Entry<Prodotto, Integer> entry : prodotti.entrySet()) {

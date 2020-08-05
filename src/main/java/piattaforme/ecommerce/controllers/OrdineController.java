@@ -69,7 +69,7 @@ public class OrdineController {
     }
 
     @GetMapping("ordini/{utente}")
-    public List<Ordine> getOrdini(@RequestBody Utente utente){
+    public List<Ordine> getOrdineByUtente(@RequestBody Utente utente){
         try{
             return ordineService.getOrdineByUtente(utente);
         }catch (UtenteNotFoundException e){

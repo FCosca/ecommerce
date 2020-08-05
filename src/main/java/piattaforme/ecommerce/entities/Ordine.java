@@ -31,9 +31,15 @@ public class Ordine {
  /*   @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
     private List<Prodotto> prodotto; */
 
-    @ManyToOne
+ /*   @ManyToOne
     @JoinColumn(name = "prodotto")
-    private Prodotto prodotto;
+    private Prodotto prodotto;  */
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="ORDINE_PRODOTTO", joinColumns = {
+            @JoinColumn(name="ORDINE_CODICE", referencedColumnName = "codice")}, inverseJoinColumns = {
+            @JoinColumn(name = "PRODOTTO_CODICE", referencedColumnName = "codice")})
+    private List<Prodotto> prodotto;
 
 
 
@@ -72,11 +78,11 @@ public class Ordine {
         this.buyer = buyer;
     }
 
-    public Prodotto getProdotto() {
+    public List<Prodotto> getProdotto() {
         return prodotto;
     }
 
-    public void setProdotto(Prodotto prodotto) {
+    public void setProdotto(List<Prodotto> prodotto) {
         this.prodotto = prodotto;
     }
 
